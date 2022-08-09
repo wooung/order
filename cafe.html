@@ -1,0 +1,137 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+  <input type="button" id="Ice-Americano" onclick="" value="Ice-Americano  3500원">
+  <input type="button" id="IA+" onclick="saveIA();" value="+">
+  <input type="button" id="IA-" onclick="saveIA();" value="-">
+  <span id="IA">0</span>
+  <br><input type="button" id="Hot-Americano" onclick="" value="Hot-Americano  3500원">
+  <input type="button" id="HA+" onclick="saveHA();" value="+">
+  <input type="button" id="HA-" onclick="saveHA();" value="-">
+  <span id="HA">0</span>
+  <br><input type="button" id="Ice-CafeLatte" onclick="" value="Ice-CafeLatte  4000원">
+  <input type="button" id="IC+" onclick="saveIC();" value="+">
+  <input type="button" id="IC-" onclick="saveIC();" value="-">
+  <span id="IC">0</span>
+  <br><input type="button" id="Hot-CafeLatte" onclick="" value="Hot-CafeLatte  4000원">
+  <input type="button" id="HC+" onclick="saveHC();" value="+">
+  <input type="button" id="HC-" onclick="saveHC();" value="-">
+  <span id="HC">0</span>
+  <br><input type="button" id="Scon" onclick="" value="Scon  3800원">
+  <input type="button" id="SC+" onclick="saveSC();" value="+">
+  <input type="button" id="SC-" onclick="saveSC();" value="-">
+  <span id="SC">0</span>
+  <br><br><input type="button" id="pay" onclick="check();" value="Check your order"> 
+  <br><br><div id="menu">menu</div>
+  <div id="price">total price</div>
+  <br><br><input type="button" id="cash" onclick="cash();" value="현금">
+  <input type="button" id="card" onclick="card();" value="카드">
+
+  <script>
+    const customerMenu = []; //고객이 선택한 메뉴이름을 저장함 
+    const customerPrice = []; //고객이 선택한 메뉴가격을 저장함
+    const totalPrice = []; //고객이 결제해야 하는 전체 금액을 저장함
+    const $menu = document.querySelector('#menu');
+    const $price = document.querySelector('#price');
+    const $IA = document.querySelector('#IA');
+    const $HA = document.querySelector('#HA');
+    const $IC = document.querySelector('#IC');
+    const $HC = document.querySelector('#HC');
+    const $SC = document.querySelector('#SC');
+    let countIA = 0;
+    let countHA = 0;
+    let countIC = 0;
+    let countHC = 0;
+    let countSC = 0;
+    let menu = [ //메뉴의 이름과 가격
+      {IceAmericano: '3500won'}, {HotAmericano: '3500won'},
+      {IceCafeLatte: '4000won'}, {HotCafeLatte: '4000won'},
+      {Scon: '3800won'}
+    ];
+    const saveIA = () => { //고객이 아이스 아메리카노 버튼을 누르면 가격을 customerChoice에 저장
+      if ('+') {
+        countIA = countIA + 1;
+        customerMenu.push('Ice-Americano', countIA);
+        customerPrice.push(Number(3500));
+      } else if ('-') {
+        countIA = countIA - 1;
+        //
+      }
+      $IA.innerText = countIA;
+    }
+    const saveHA = () => { //고객이 핫 아메리카노 버튼을 누르면 가격을 customerChoice에 저장
+      if (value = "+") {
+        countHA = countHA + 1;
+        customerMenu.push('Hot-Americano', countHA);
+        customerPrice.push(Number(3500));
+      } else if (value = "-") {
+        countHA = countHA - 1;
+      }
+      $HA.innerText = countHA;
+    }
+    const saveIC = () => { //고객이 아이스 카페라떼 버튼을 누르면 가격을 customerChoice에 저장
+      if (value = "+") {
+        countIC = countIC + 1;
+        customerMenu.push('Ice-CafeLatte', countIC);
+        customerPrice.push(Number(4000));
+      } else if (value = "-") {
+        countIC = countIC - 1;
+      }
+      $IC.innerText = countIC;
+    }
+    const saveHC = () => { //고객이 핫 카페라떼 버튼을 누르면 가격을 customerChoice에 저장
+      if (value = "+") {
+        countHC = countHC + 1;
+        customerMenu.push('Hot-CafeLatte', countHC);
+        customerPrice.push(Number(4000));
+      } else if (value = "-") {
+        countHC = countHC - 1;
+      }
+      $HC.innerText = countHC;
+    }
+    const saveSC = () => { //고객이 스콘 버튼을 누르면 가격을 customerChoice에 저장
+      if (value = "+") {
+        countSC = countSC + 1;
+        customerMenu.push('Scon', countSC);
+        customerPrice.push(Number(3800));
+      } else if (value = "-") {
+        countSC = countSC - 1;
+      }
+      $SC.innerText = countSC;
+    }
+    
+    const total = () => {
+      const calculate = customerPrice.reduce((a, b) => a + b);
+      totalPrice.push(calculate);
+    }
+    const checkOrder = () => { //고객이 선택한 메뉴와 총 금액을 알려줌
+      $menu.innerText = customerMenu;
+      $price.innerText = totalPrice;
+    }
+    const check = () => {
+      total();
+      checkOrder();
+    }
+    
+    const cash = () => { //현금결제 일 때 거스름돈을 계산해 알려줌
+      let yourPay = parseInt(prompt('지불금액을 입력해주세요', ''));
+      let change = () => {
+        if (yourPay === totalPrice) {
+          alert('주문해 주셔서 감사합니다!');
+        } else if (yourPay > totalPrice) {
+          let changeMoney = yourPay - totalPrice;
+          alert(changeMoney);
+        } else if (yourPay < totalPrice) {
+          alert('금액을 확인해주세요');
+        }
+      }
+    }
+    const card = () => { //카드결제 일 때, 
+
+    }
+  </script> 
+</body>
+</html>
